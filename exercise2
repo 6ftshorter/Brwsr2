@@ -1,0 +1,117 @@
+package BrowserPackage;
+
+import java.util.Scanner;
+
+public enum Permissions {
+	CAMERA,AUDIO,LOCATION;
+}
+ class BrwsrDef{
+	public void whoAmI() {
+		 System.out.println("I am a browser");
+		 }
+	
+}
+
+ class GoogleChrome extends BrwsrDef {
+	 private boolean locationPermission;
+	 private boolean cameraPermission;
+	 private boolean microphonePermission;
+	 private final String versionNumber;
+	 
+	 public GoogleChrome() {
+	 super();
+	 this.locationPermission = false;
+	 this.cameraPermission = false;
+	 this.microphonePermission = false;
+	 this.versionNumber = "1.0";
+	 }
+	 
+	 public void whoAmI() {
+	 System.out.println("I am Google Chrome");
+	 
+	 }
+	 
+	 boolean isCamera = false;
+	 boolean isAudio = false;
+	 boolean isLocation = false;
+	 
+	 
+	 public void setPermsn(Permissions C){
+		 if(C.equals(Permissions.CAMERA)) {
+			 isCamera = true;
+		 }
+		 
+		 else if(C.equals(Permissions.AUDIO)) {
+			 isAudio = true;
+			 }
+		 
+		 else {
+			 isLocation = true;		 
+		 }
+	 }
+
+	 public void setPermsn(Permissions C,Permissions A,Permissions L) {
+		 isCamera = true;
+		 isAudio = true;
+		 isLocation = true;
+	 }
+		 
+	 public String getVersionNumber() {
+	 return this.versionNumber;
+	 }
+}
+
+
+	class Firefox extends BrwsrDef {
+	 public Firefox() {
+	 super();
+	 }
+	 public void whoAmI() {
+	 System.out.println("I am Firefox");
+	 }
+	}
+
+
+
+public class Browser {
+
+	
+	 
+	
+		public static void main (String[] args) {
+			BrwsrDef tabOne = new GoogleChrome();
+			BrwsrDef tabTwo = new Firefox();
+			BrwsrDef tabThree = new Firefox();
+			BrwsrDef tabFour = new GoogleChrome();
+			BrwsrDef tabFive = new GoogleChrome();
+			 
+			 GoogleChrome t1 = (GoogleChrome)tabOne  ;
+			 Firefox t2 = (Firefox)tabTwo;
+			 Firefox t3 = (Firefox)tabThree;
+			 GoogleChrome t4 = (GoogleChrome)tabFour;
+			 GoogleChrome t5 = (GoogleChrome)tabFive;
+			 
+			 Permissions Camera = Permissions.CAMERA;
+			 Permissions Audio = Permissions.AUDIO;
+			 Permissions Location = Permissions.LOCATION;
+			 
+			 BrwsrDef[] allBrowsers = { t1,t2,t3,t4,t5 };
+				
+				for(int i = 0;i<5;i++) {
+					allBrowsers[i].whoAmI();
+				}
+				
+				int numGoogleChrome = 0;
+				 for (BrwsrDef browser : allBrowsers) {
+				 if (browser instanceof GoogleChrome) {
+					 numGoogleChrome++;
+				 }
+				 }
+				 t1.setPermsn(Camera);
+				 t4.setPermsn(Location);
+				 t5.setPermsn(Camera, Audio, Location);
+				 
+				 System.out.println("Number of Google Chrome instances: " + numGoogleChrome);
+				 
+}
+}
